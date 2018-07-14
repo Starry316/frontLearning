@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style type="text/css">
+    abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body, canvas, caption, center, cite, code, dd, del, details, dfn, dialog, div, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, output, p, pre, q, ruby, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, textarea, tfoot, th, thead, time, tr, tt, u, ul, var, video {
+      font-family: inherit;
+      font-size: 100%;
+      font-weight: inherit;
+      font-style: inherit;
+      vertical-align: baseline;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      outline: 0;
+      background: 0 0;
+    }
+    .overlayTransparent{
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #000;
+      opacity: .2;
+      z-index: 0;
+    }
+    .overlay{
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-size: 100% 100%;
+      background-color: #fff;
+      opacity: 1;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+
+    }
+    .navigation{
+      background-color: slategrey;
+      padding: 10px;
+    }
+    .leftDiv{
+      margin-left: 20px;
+      display: inline-block;
+      vertical-align: baseline;
+      position: relative;
+      color: #fff;
+      z-index: 1;
+
+    }
+    .rightDiv{
+      float: right;
+      display: inline-block;
+      position: relative;
+      color: #fff;
+      z-index: 1;
+    }
+    .zoomImage{
+      width:100%;
+      height:0;
+      padding-bottom: 100%;
+      overflow:hidden;
+      background-position: center center;
+      background-repeat: no-repeat;
+      -webkit-background-size:cover;
+      -moz-background-size:cover;
+      background-size:cover;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="overlayTransparent"></div>
+  <div class="overlay zoomImage" style="background-image: url(img/img_0022.jpg)">
+
+  </div>
+  <div class="navigation">
+    <div class="leftDiv">
+      当position设置为
+    </div>
+    <div class="rightDiv">
+      absolute、relative或fixed z-index生效
+    </div>
+  </div>
+
+
+</body>
+
+</html>

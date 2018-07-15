@@ -3,80 +3,495 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <link rel="stylesheet" href="css/Hover.css" type="text/css" />
     <style>
 
       .nav ul {
         display: flex;
         position: relative;
-        width: 40%;
-        top: 20%;
-        left: 70%;
+        margin-top: 0px;
+        margin-bottom: 10px;
       }
-
       .nav li {
         list-style-type: none;
         position: relative;
-        padding: 20px;
-        font-size: 24px;
-        color: #000;
-        line-height: 1;
+        padding: 5px 10px;
+        font-size: 18px;
+        color: white;
+        line-height: 1.5;
         transition: 0.2s all linear;
         cursor: pointer;
       }
-
       .nav li::before {
-        content: "";
+        content:"";
         position: absolute;
         top: 0;
         left: 100%;
         width: 0;
         height: 100%;
-        border-bottom: 2px solid #000;
+        border-bottom: 2px solid white;
         transition: 0.2s all linear;
       }
-
       .nav li:hover::before {
         width: 100%;
         top: 0;
         left: 0;
         transition-delay: 0.1s;
-        border-bottom-color: #000;
+        border-bottom-color: white;
         z-index: -1;
       }
-
       .nav li:hover ~ li::before {
         left: 0;
       }
-
       .nav li:active {
-        background: #000;
-        color: #fff;
+        background: white;
+        color: black;
       }
-      .active{
-        background: #000;
-        color: #fff;
+      .active {
+        background: white;
+        color: black;
       }
-      .header{
+      .header {
         margin: 0;
-        box-shadow: 0px 5px 10px #888888;
-        padding-bottom: 10px;
+        background-image: url("img/img_0004.jpg");
+        padding-top: 10px;
         top: 0;
         left: 0;
         right: 0;
-        position: absolute;
+        position: fixed;
       }
+      .header-shadow {
+        box-shadow: 0px 5px 30px gray;
+      }
+      .overlayTransparent {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #000;
+        opacity: 0;
+        z-index: -2;
+      }
+      .showOverlay {
+        z-index: 10!important;
+        animation: overlayShow .5s ease-out forwards;
+      }
+      .options {
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 1;
+        padding: 30px;
+        width: 50%;
+        background-color: white;
+        border-radius: 3px;
+        z-index: -2;
+        overflow: hidden;
+        opacity: 0;
+        transition: .2s;
+        box-shadow: 0px 5px 30px black;
+      }
+      .show {
+        z-index: 9999!important;
+        animation: optionShow .5s ease-out forwards;
+      }
+      .article {
+        position: relative;
+        background-color: white;
+        z-index: -1;
+        margin: 70px 30% 0 5%;
+        padding: 20px;
+        box-shadow: 0px 5px 30px gray;
+        line-height: 2;
+        border-radius: 10px;
+      }
+      .right-float{
+        position: absolute;
+        top: 270px;
+        left: 75%;
+        width: 20%;
+        background-color: white;
+        padding: 20px;
+        box-shadow: 0px 5px 30px gray;
+        border-radius: 10px;
+      }
+      .right-float-fixed{
+        top: 70px;
+        position: fixed;
 
+      }
+      .return-top{
+        position: fixed;
+        bottom: 20px;
+        left: 75%;
+        width: 5%;
+        text-align:center;
+        background-color: #555555;
+        border-radius: 10px;
+        color: white;
+      }
+      .container{
+        background-color: #f3f3f3;
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin: 0;
+        z-index: -1;
+      }
+      .zoomImage{
+        width:100%;
+        height:0;
+        padding-bottom: 100%;
+        background-position: center center;
+        background-repeat: no-repeat;
+        -webkit-background-size:cover;
+        -moz-background-size:cover;
+        background-size:cover;
+      }
+      @keyframes optionShow {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes overlayShow {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: .3;
+        }
+      }
+      @keyframes floatMove {
+        from{
+          top: 50px;
+        }
+        to {
+          top: 70px;
+        }
+      }
+      @media screen and (max-width: 500px) {
+        .options {
+          position: fixed;
+          margin: 10px 5px;
+          opacity: 1;
+          padding: 10px;
+          width: 80%;
+          height: 50%;
+          border-radius: 3px;
+          z-index: -2;
+          overflow: scroll;
+          opacity: 0;
+          transition: .2s;
+          box-shadow: 0px 0px 30px black;
+        }
+        .nav ul{
+          position: relative;
+          float: right;
+          right: 0;
 
+        }
+        .article {
+          margin: 60px 0 0 0;
+          padding: 20px 5px;
+          line-height: 2;
+          border-radius: 0px;
+          box-shadow: 0px 0px 0px black;
+        }
+        .right-float{
+          position: relative;
+          top: 0;
+          left: 2%;
+          width: 85%;
+          margin: 20px 0;
+          background-color: white;
+          padding: 20px;
+          box-shadow: 0px 0px 1px gray;
+        }
+
+        .right-float-fixed{
+
+        }
+        .return-top{
+          position: fixed;
+          bottom: 10px;
+          left: 85%;
+          width: 5%;
+          text-align:center;
+          background-color: #555555;
+          border-radius: 10px;
+          color: white;
+        }
+      }
 
     </style>
 </head>
 <body>
-  <div class="nav header">
-    <ul>
-      <li>This is</li>
-      <li>my test</li>
-      <li>for the</li>
-    </ul>
+
+<div id ="header" class="nav header">
+  <ul>
+    <li>博客</li>
+    <li>标签</li>
+    <li onclick="show()">管理</li>
+  </ul>
+</div>
+<div id = "overlay" onclick="show()" class="overlayTransparent"></div>
+<div id = "option" class="options">
+  <p>
+    要求
+    实现滚动条滚到一定高度时，导航栏固定。
+
+    思路
+    1.实现一个位置在页面下方的导航栏
+    2.添加滚动条监听函数，当滚动到一定高度时，为导航栏添加属性：
+  </p>
+  <p>
+    要求
+    实现滚动条滚到一定高度时，导航栏固定。
+
+    思路
+    1.实现一个位置在页面下方的导航栏
+    2.添加滚动条监听函数，当滚动到一定高度时，为导航栏添加属性：
+  </p>
+  <p>
+    要求
+    实现滚动条滚到一定高度时，导航栏固定。
+
+    思路
+    1.实现一个位置在页面下方的导航栏
+    2.添加滚动条监听函数，当滚动到一定高度时，为导航栏添加属性：
+  </p>
+  <p>
+    要求
+    实现滚动条滚到一定高度时，导航栏固定。
+
+    思路
+    1.实现一个位置在页面下方的导航栏
+    2.添加滚动条监听函数，当滚动到一定高度时，为导航栏添加属性：
+  </p>
+  <p>
+    要求
+    实现滚动条滚到一定高度时，导航栏固定。
+
+    思路
+    1.实现一个位置在页面下方的导航栏
+    2.添加滚动条监听函数，当滚动到一定高度时，为导航栏添加属性：
+  </p>
+</div>
+<div class="container">
+  <div class="article">
+    <h1>Python是一种计算机程序设计语言</h1>
+    <h4>发表于 2018-5-20</h4>
+    <div></div>
+    <p>
+      Python是一种计算机程序设计语言。你可能已经听说过很多种流行的编程语言，比如非常难学的C语言，非常流行的Java语言，适合初学者的Basic语言，适合网页编程的JavaScript语言等等。
+
+      那Python是一种什么语言？
+
+      首先，我们普及一下编程语言的基础知识。用任何编程语言来开发程序，都是为了让计算机干活，比如下载一个MP3，编写一个文档等等，而计算机干活的CPU只认识机器指令，所以，尽管不同的编程语言差异极大，最后都得“翻译”成CPU可以执行的机器指令。而不同的编程语言，干同一个活，编写的代码量，差距也很大。
+
+      比如，完成同一个任务，C语言要写1000行代码，Java只需要写100行，而Python可能只要20行。
+
+      所以Python是一种相当高级的语言。
+
+      你也许会问，代码少还不好？代码少的代价是运行速度慢，C程序运行1秒钟，Java程序可能需要2秒，而Python程序可能就需要10秒。
+
+      那是不是越低级的程序越难学，越高级的程序越简单？表面上来说，是的，但是，在非常高的抽象计算中，高级的Python程序设计也是非常难学的，所以，高级程序语言不等于简单。
+
+      但是，对于初学者和完成普通任务，Python语言是非常简单易用的。连Google都在大规模使用Python，你就不用担心学了会没用。
+
+      用Python可以做什么？可以做日常任务，比如自动备份你的MP3；可以做网站，很多著名的网站包括YouTube就是Python写的；可以做网络游戏的后台，很多在线游戏的后台都是Python开发的。总之就是能干很多很多事啦。
+
+      Python当然也有不能干的事情，比如写操作系统，这个只能用C语言写；写手机应用，只能用Swift/Objective-C（针对iPhone）和Java（针对Android）；写3D游戏，最好用C或C++。
+    </p>
+    <p>
+      Python是一种计算机程序设计语言。你可能已经听说过很多种流行的编程语言，比如非常难学的C语言，非常流行的Java语言，适合初学者的Basic语言，适合网页编程的JavaScript语言等等。
+
+      那Python是一种什么语言？
+
+      首先，我们普及一下编程语言的基础知识。用任何编程语言来开发程序，都是为了让计算机干活，比如下载一个MP3，编写一个文档等等，而计算机干活的CPU只认识机器指令，所以，尽管不同的编程语言差异极大，最后都得“翻译”成CPU可以执行的机器指令。而不同的编程语言，干同一个活，编写的代码量，差距也很大。
+
+      比如，完成同一个任务，C语言要写1000行代码，Java只需要写100行，而Python可能只要20行。
+
+      所以Python是一种相当高级的语言。
+
+      你也许会问，代码少还不好？代码少的代价是运行速度慢，C程序运行1秒钟，Java程序可能需要2秒，而Python程序可能就需要10秒。
+
+      那是不是越低级的程序越难学，越高级的程序越简单？表面上来说，是的，但是，在非常高的抽象计算中，高级的Python程序设计也是非常难学的，所以，高级程序语言不等于简单。
+
+      但是，对于初学者和完成普通任务，Python语言是非常简单易用的。连Google都在大规模使用Python，你就不用担心学了会没用。
+
+      用Python可以做什么？可以做日常任务，比如自动备份你的MP3；可以做网站，很多著名的网站包括YouTube就是Python写的；可以做网络游戏的后台，很多在线游戏的后台都是Python开发的。总之就是能干很多很多事啦。
+
+      Python当然也有不能干的事情，比如写操作系统，这个只能用C语言写；写手机应用，只能用Swift/Objective-C（针对iPhone）和Java（针对Android）；写3D游戏，最好用C或C++。
+    </p>
+    <p>
+      Python是一种计算机程序设计语言。你可能已经听说过很多种流行的编程语言，比如非常难学的C语言，非常流行的Java语言，适合初学者的Basic语言，适合网页编程的JavaScript语言等等。
+
+      那Python是一种什么语言？
+
+      首先，我们普及一下编程语言的基础知识。用任何编程语言来开发程序，都是为了让计算机干活，比如下载一个MP3，编写一个文档等等，而计算机干活的CPU只认识机器指令，所以，尽管不同的编程语言差异极大，最后都得“翻译”成CPU可以执行的机器指令。而不同的编程语言，干同一个活，编写的代码量，差距也很大。
+
+      比如，完成同一个任务，C语言要写1000行代码，Java只需要写100行，而Python可能只要20行。
+
+      所以Python是一种相当高级的语言。
+
+      你也许会问，代码少还不好？代码少的代价是运行速度慢，C程序运行1秒钟，Java程序可能需要2秒，而Python程序可能就需要10秒。
+
+      那是不是越低级的程序越难学，越高级的程序越简单？表面上来说，是的，但是，在非常高的抽象计算中，高级的Python程序设计也是非常难学的，所以，高级程序语言不等于简单。
+
+      但是，对于初学者和完成普通任务，Python语言是非常简单易用的。连Google都在大规模使用Python，你就不用担心学了会没用。
+
+      用Python可以做什么？可以做日常任务，比如自动备份你的MP3；可以做网站，很多著名的网站包括YouTube就是Python写的；可以做网络游戏的后台，很多在线游戏的后台都是Python开发的。总之就是能干很多很多事啦。
+
+      Python当然也有不能干的事情，比如写操作系统，这个只能用C语言写；写手机应用，只能用Swift/Objective-C（针对iPhone）和Java（针对Android）；写3D游戏，最好用C或C++。
+    </p>
+    <p>
+      Python是一种计算机程序设计语言。你可能已经听说过很多种流行的编程语言，比如非常难学的C语言，非常流行的Java语言，适合初学者的Basic语言，适合网页编程的JavaScript语言等等。
+
+      那Python是一种什么语言？
+
+      首先，我们普及一下编程语言的基础知识。用任何编程语言来开发程序，都是为了让计算机干活，比如下载一个MP3，编写一个文档等等，而计算机干活的CPU只认识机器指令，所以，尽管不同的编程语言差异极大，最后都得“翻译”成CPU可以执行的机器指令。而不同的编程语言，干同一个活，编写的代码量，差距也很大。
+
+      比如，完成同一个任务，C语言要写1000行代码，Java只需要写100行，而Python可能只要20行。
+
+      所以Python是一种相当高级的语言。
+
+      你也许会问，代码少还不好？代码少的代价是运行速度慢，C程序运行1秒钟，Java程序可能需要2秒，而Python程序可能就需要10秒。
+
+      那是不是越低级的程序越难学，越高级的程序越简单？表面上来说，是的，但是，在非常高的抽象计算中，高级的Python程序设计也是非常难学的，所以，高级程序语言不等于简单。
+
+      但是，对于初学者和完成普通任务，Python语言是非常简单易用的。连Google都在大规模使用Python，你就不用担心学了会没用。
+
+      用Python可以做什么？可以做日常任务，比如自动备份你的MP3；可以做网站，很多著名的网站包括YouTube就是Python写的；可以做网络游戏的后台，很多在线游戏的后台都是Python开发的。总之就是能干很多很多事啦。
+
+      Python当然也有不能干的事情，比如写操作系统，这个只能用C语言写；写手机应用，只能用Swift/Objective-C（针对iPhone）和Java（针对Android）；写3D游戏，最好用C或C++。
+    </p>
+    <p>
+      Python是一种计算机程序设计语言。你可能已经听说过很多种流行的编程语言，比如非常难学的C语言，非常流行的Java语言，适合初学者的Basic语言，适合网页编程的JavaScript语言等等。
+
+      那Python是一种什么语言？
+
+      首先，我们普及一下编程语言的基础知识。用任何编程语言来开发程序，都是为了让计算机干活，比如下载一个MP3，编写一个文档等等，而计算机干活的CPU只认识机器指令，所以，尽管不同的编程语言差异极大，最后都得“翻译”成CPU可以执行的机器指令。而不同的编程语言，干同一个活，编写的代码量，差距也很大。
+
+      比如，完成同一个任务，C语言要写1000行代码，Java只需要写100行，而Python可能只要20行。
+
+      所以Python是一种相当高级的语言。
+
+      你也许会问，代码少还不好？代码少的代价是运行速度慢，C程序运行1秒钟，Java程序可能需要2秒，而Python程序可能就需要10秒。
+
+      那是不是越低级的程序越难学，越高级的程序越简单？表面上来说，是的，但是，在非常高的抽象计算中，高级的Python程序设计也是非常难学的，所以，高级程序语言不等于简单。
+
+      但是，对于初学者和完成普通任务，Python语言是非常简单易用的。连Google都在大规模使用Python，你就不用担心学了会没用。
+
+      用Python可以做什么？可以做日常任务，比如自动备份你的MP3；可以做网站，很多著名的网站包括YouTube就是Python写的；可以做网络游戏的后台，很多在线游戏的后台都是Python开发的。总之就是能干很多很多事啦。
+
+      Python当然也有不能干的事情，比如写操作系统，这个只能用C语言写；写手机应用，只能用Swift/Objective-C（针对iPhone）和Java（针对Android）；写3D游戏，最好用C或C++。
+    </p>
+    <p>
+      Python是一种计算机程序设计语言。你可能已经听说过很多种流行的编程语言，比如非常难学的C语言，非常流行的Java语言，适合初学者的Basic语言，适合网页编程的JavaScript语言等等。
+
+      那Python是一种什么语言？
+
+      首先，我们普及一下编程语言的基础知识。用任何编程语言来开发程序，都是为了让计算机干活，比如下载一个MP3，编写一个文档等等，而计算机干活的CPU只认识机器指令，所以，尽管不同的编程语言差异极大，最后都得“翻译”成CPU可以执行的机器指令。而不同的编程语言，干同一个活，编写的代码量，差距也很大。
+
+      比如，完成同一个任务，C语言要写1000行代码，Java只需要写100行，而Python可能只要20行。
+
+      所以Python是一种相当高级的语言。
+
+      你也许会问，代码少还不好？代码少的代价是运行速度慢，C程序运行1秒钟，Java程序可能需要2秒，而Python程序可能就需要10秒。
+
+      那是不是越低级的程序越难学，越高级的程序越简单？表面上来说，是的，但是，在非常高的抽象计算中，高级的Python程序设计也是非常难学的，所以，高级程序语言不等于简单。
+
+      但是，对于初学者和完成普通任务，Python语言是非常简单易用的。连Google都在大规模使用Python，你就不用担心学了会没用。
+
+      用Python可以做什么？可以做日常任务，比如自动备份你的MP3；可以做网站，很多著名的网站包括YouTube就是Python写的；可以做网络游戏的后台，很多在线游戏的后台都是Python开发的。总之就是能干很多很多事啦。
+
+      Python当然也有不能干的事情，比如写操作系统，这个只能用C语言写；写手机应用，只能用Swift/Objective-C（针对iPhone）和Java（针对Android）；写3D游戏，最好用C或C++。
+    </p>
+    <p>
+      Python是一种计算机程序设计语言。你可能已经听说过很多种流行的编程语言，比如非常难学的C语言，非常流行的Java语言，适合初学者的Basic语言，适合网页编程的JavaScript语言等等。
+
+      那Python是一种什么语言？
+
+      首先，我们普及一下编程语言的基础知识。用任何编程语言来开发程序，都是为了让计算机干活，比如下载一个MP3，编写一个文档等等，而计算机干活的CPU只认识机器指令，所以，尽管不同的编程语言差异极大，最后都得“翻译”成CPU可以执行的机器指令。而不同的编程语言，干同一个活，编写的代码量，差距也很大。
+
+      比如，完成同一个任务，C语言要写1000行代码，Java只需要写100行，而Python可能只要20行。
+
+      所以Python是一种相当高级的语言。
+
+      你也许会问，代码少还不好？代码少的代价是运行速度慢，C程序运行1秒钟，Java程序可能需要2秒，而Python程序可能就需要10秒。
+
+      那是不是越低级的程序越难学，越高级的程序越简单？表面上来说，是的，但是，在非常高的抽象计算中，高级的Python程序设计也是非常难学的，所以，高级程序语言不等于简单。
+
+      但是，对于初学者和完成普通任务，Python语言是非常简单易用的。连Google都在大规模使用Python，你就不用担心学了会没用。
+
+      用Python可以做什么？可以做日常任务，比如自动备份你的MP3；可以做网站，很多著名的网站包括YouTube就是Python写的；可以做网络游戏的后台，很多在线游戏的后台都是Python开发的。总之就是能干很多很多事啦。
+
+      Python当然也有不能干的事情，比如写操作系统，这个只能用C语言写；写手机应用，只能用Swift/Objective-C（针对iPhone）和Java（针对Android）；写3D游戏，最好用C或C++。
+    </p>
   </div>
+  <div id = "right-float" class="right-float">
+    <h4>这里是右边栏</h4>
+    <p>
+      这里是右边栏
+      这里是右边栏
+      这里是右边栏
+      这里是右边栏
+    </p>
+    <p>
+      这里是右边栏
+      这里是右边栏
+      这里是右边栏
+      这里是右边栏
+    </p>
+    <p>
+      这里是右边栏
+      这里是右边栏
+      这里是右边栏
+      这里是右边栏
+    </p>
+  </div>
+  <a href="#" rel="hover-shadow" class="button float-shadow return-top">返回顶端</a>
+</div>
 </body>
+<script>
+  var isShow = false;
+  function show(){
+    if(!isShow){
+      $("#option").addClass("show");
+      $("#overlay").addClass("showOverlay");
+      isShow=true;
+    }
+    else {
+      $("#option").removeClass("show");
+      $("#overlay").removeClass("showOverlay");
+      isShow=false;
+    }
+  }
+  $(document).ready(function(){
+    $(window).scroll(function (event) {
+      if ($(window).scrollTop() > 20) {
+        $("#header").addClass("header-shadow");
+      }
+      else{
+        $("#header").removeClass("header-shadow");
+      }
+      if ($(window).scrollTop() > 200) {
+        $("#right-float").addClass("right-float-fixed");
+      }
+      else{
+        $("#right-float").removeClass("right-float-fixed");
+      }
+    });
+  });
+
+
+</script>
 </html>
